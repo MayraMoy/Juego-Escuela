@@ -1,1 +1,21 @@
 # Juego-Escuela.
+
+# 🐍 Snake Game in JavaScript - v1.1
+
+Este es un juego clásico de **Snake** desarrollado utilizando HTML, CSS y JavaScript puro.  
+Es una implementación simple, liviana y perfecta para aprender los fundamentos del desarrollo web con juegos interactivos.
+
+---
+
+## 🎮 Cómo jugar
+
+- Usá las teclas del teclado para mover la serpiente:
+  - ⬅️ Izquierda: `←`
+  - ➡️ Derecha: `→`
+  - ⬆️ Arriba: `↑`
+  - ⬇️ Abajo: `↓`
+- Comé los cuadrados verdes para crecer.
+- Evitá chocar contra las paredes o contra vos mismo.
+- ¡Cada comida te da +1 punto!
+
+---
