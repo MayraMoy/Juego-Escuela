@@ -1,5 +1,10 @@
 # Juego-Escuela.
 
+# 🧒 Integrantes
+
+- Mayra Moyano
+- Leandro Asis
+  
 # 🐍 Snake Game in JavaScript - v1.1
 
 Este es un juego clásico de **Snake** desarrollado utilizando HTML, CSS y JavaScript puro.  
