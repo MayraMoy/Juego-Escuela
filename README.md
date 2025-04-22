@@ -24,3 +24,9 @@ Es una implementación simple, liviana y perfecta para aprender los fundamentos 
 - ¡Cada comida te da +1 punto!
 
 ---
+
+## 🛠️ Herramientas
+
+- VS Code
+- Chat GPT
+- GitHub
