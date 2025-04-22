@@ -17,6 +17,27 @@ let foodTimeoutId; // ID del temporizador para la comida
 let highScore = localStorage.getItem("high-score") || 0;
 highScoreElement.innerText = `High Score: ${highScore}`;
 
+// Cargar Sonidos
+const sonidoFondo = new Audio("vibora.mp3");
+sonidoFondo.loop = true;
+sonidoFondo.volume = 0.2;
+
+// Reproducir sonido al primer evento del usuario
+const iniciarMusicaFondo = () => {
+    sonidoFondo.play().catch(e => {
+        // En caso de error por autoplay, se ignora
+        console.warn("Autoplay bloqueado hasta que el usuario interactúe.");
+    });
+    // Esto se ejecuta una sola vez
+    document.removeEventListener("keydown", iniciarMusicaFondo);
+    document.removeEventListener("click", iniciarMusicaFondo);
+};
+
+// Esperar una interacción para iniciar el sonido
+document.addEventListener("keydown", iniciarMusicaFondo);
+document.addEventListener("click", iniciarMusicaFondo);
+
+
 const updateFoodPosition = () => {
     // Generar una nueva posición para la comida
     foodX = Math.floor(Math.random() * 30) + 1;
