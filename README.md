@@ -1,5 +1,10 @@
 # Juego-Escuela.
 
+# 🧒 Integrantes
+
+- Mayra Moyano
+- Leandro Asis
+  
 # 🐍 Snake Game in JavaScript - v1.1
 
 Este es un juego clásico de **Snake** desarrollado utilizando HTML, CSS y JavaScript puro.  
@@ -19,3 +24,9 @@ Es una implementación simple, liviana y perfecta para aprender los fundamentos 
 - ¡Cada comida te da +1 punto!
 
 ---
+
+## 🛠️ Herramientas
+
+- VS Code
+- Chat GPT
+- GitHub
