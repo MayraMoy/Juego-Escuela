@@ -1,5 +1,7 @@
 # Juego-Escuela.
 
+Documentacion: https://docs.google.com/document/d/155cXNyuurE2G_WzyYardl7cVLJO4DltwZANKs2Jbvyk/edit?usp=sharing
+
 # 🧒 Integrantes
 
 - Mayra Moyano
