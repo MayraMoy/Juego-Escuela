@@ -1,6 +1,6 @@
 # Juego-Escuela.
 
-Documentacion: https://docs.google.com/document/d/155cXNyuurE2G_WzyYardl7cVLJO4DltwZANKs2Jbvyk/edit?usp=sharing
+<a href="https://docs.google.com/document/d/155cXNyuurE2G_WzyYardl7cVLJO4DltwZANKs2Jbvyk/edit?usp=sharing">Documentacion</a>
 
 # 🧒 Integrantes
 
