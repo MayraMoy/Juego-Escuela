@@ -15,6 +15,7 @@ let foodTimeoutId; // ID del temporizador para la comida
 let level = 1; // Nivel inicial
 let pointsToNextLevel = 10; // Puntos necesarios para pasar al siguiente nivel
 let directionQueue = []; // Cola para almacenar los movimientos pendientes
+let obstacles = []; // Array para almacenar las posiciones de los obstáculos
 
 // Getting high score from the local storage
 let highScore = localStorage.getItem("high-score") || 0;
@@ -38,7 +39,7 @@ const iniciarMusicaFondo = () => {
 
 // Esperar una interacción para iniciar el sonido
 document.addEventListener("keydown", iniciarMusicaFondo);
-document.addEventListener("click", iniciarMusicaFondo); 
+document.addEventListener("click", iniciarMusicaFondo);
 
 const updateFoodPosition = () => {
     // Generar una nueva posición para la comida
@@ -53,11 +54,15 @@ const updateFoodPosition = () => {
 }
 
 const handleGameOver = () => {
-    // Clearing the timer and reloading the page on game over
+    // Detener la música de fondo
+    sonidoFondo.pause();
+    sonidoFondo.currentTime = 0; // Reiniciar la música al inicio
+
+    // Detener el temporizador y recargar la página
     clearInterval(setIntervalId);
     alert("Game Over! Press OK to replay...");
     location.reload();
-}
+};
 
 const changeDirection = e => {
     // Agregar la dirección a la cola si no es opuesta a la actual
@@ -91,10 +96,15 @@ const increaseSpeed = () => {
     setIntervalId = setInterval(initGame, gameSpeed);
 }
 
+/*
 const resetGameForNextLevel = () => {
+    // Incrementar el tamaño del mapa
+    const newGridSize = 30 + level * 5; // Incrementar el tamaño en 5 celdas por nivel
+    document.documentElement.style.setProperty('--grid-size', newGridSize);
+
     // Reiniciar la posición de la serpiente y la comida
-    snakeX = 5;
-    snakeY = 5;
+    snakeX = Math.floor(newGridSize / 2);
+    snakeY = Math.floor(newGridSize / 2);
     velocityX = 0;
     velocityY = 0;
     snakeBody = [];
@@ -113,7 +123,27 @@ const resetGameForNextLevel = () => {
     setIntervalId = setInterval(initGame, gameSpeed);
 
     alert(`¡Nivel ${level}! Ahora necesitas ${pointsToNextLevel} puntos para pasar al siguiente nivel.`);
-}
+};
+*/
+
+/*
+const generateObstacles = () => {
+    obstacles = [];
+    const obstacleCount = level * 3; // Incrementar el número de obstáculos por nivel
+    for (let i = 0; i < obstacleCount; i++) {
+        const obstacleX = Math.floor(Math.random() * 30) + 1;
+        const obstacleY = Math.floor(Math.random() * 30) + 1;
+
+        // Evitar que los obstáculos aparezcan en la posición inicial de la serpiente o la comida
+        if ((obstacleX === snakeX && obstacleY === snakeY) || (obstacleX === foodX && obstacleY === foodY)) {
+            i--; // Reintentar si la posición está ocupada
+            continue;
+        }
+
+        obstacles.push({ x: obstacleX, y: obstacleY });
+    }
+};
+*/
 
 const initGame = () => {
     if (gameOver) return handleGameOver();
@@ -121,6 +151,11 @@ const initGame = () => {
     applyDirection(); // Aplicar el siguiente movimiento de la cola
 
     let html = `<div class="food" style="grid-area: ${foodY} / ${foodX}"></div>`;
+
+    // Generar los obstáculos
+    obstacles.forEach(obstacle => {
+        html += `<div class="obstacle" style="grid-area: ${obstacle.y} / ${obstacle.x}"></div>`;
+    });
 
     // Comprobar si la serpiente come la comida
     if (snakeX === foodX && snakeY === foodY) {
@@ -135,6 +170,7 @@ const initGame = () => {
 
         // Verificar si se alcanzaron los puntos necesarios para pasar de nivel
         if (score >= pointsToNextLevel) {
+            generateObstacles(); // Generar nuevos obstáculos
             resetGameForNextLevel();
         }
     }
@@ -142,6 +178,11 @@ const initGame = () => {
     // Actualizar la posición de la cabeza de la serpiente
     snakeX += velocityX;
     snakeY += velocityY;
+
+    // Comprobar si la serpiente choca con un obstáculo
+    if (obstacles.some(obstacle => obstacle.x === snakeX && obstacle.y === snakeY)) {
+        gameOver = true;
+    }
 
     // Shifting forward the values of the elements in the snake body by one
     for (let i = snakeBody.length - 1; i > 0; i--) {
@@ -193,5 +234,6 @@ const initGame = () => {
 };
 
 updateFoodPosition();
+generateObstacles();
 setIntervalId = setInterval(initGame, gameSpeed);
 document.addEventListener("keyup", changeDirection);
